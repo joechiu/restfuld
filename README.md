@@ -8,8 +8,8 @@ tested by centos 6.4, Ubuntu 12 and 14<br>
 1. copy ./conf/restful.conf to /etc/init<br>
 2. run the following commands<br>
 $ stop restful; start restful<br>
-- restful stop/waiting<br>
-- restful start/running, process 5866<br>
+-- restful stop/waiting<br>
+-- restful start/running, process 5866<br>
 3. check if restful daemon is running by a browser<br>
 http://localhost:34780/?act=test&hello=world&foo=bar<br>
 {"hello":"world","foo":"bar"}<br>
