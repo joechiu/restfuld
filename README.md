@@ -16,6 +16,9 @@ http://localhost:34780/?act=test&hello=world&foo=bar<br>
 4. check if a log restful-ddddmmyy.log generated in /tmp/<br>
 <br><br>
 
+# KNOWN ISSUES<br>
+SSL Certificate issue caused by one of LWP module if still remember. Please post which you'd met for investigation.<br>
+
 # TODO<br>
 Currently Perl restful daemon supports text and JSON format requests and responses though it also supports simple XML action. The following improvements are expected to be done if time permitted. <br>
 
