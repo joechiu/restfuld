@@ -19,5 +19,5 @@ http://localhost:34780/?act=test&hello=world&foo=bar<br>
 # TODO<br>
 Currently Perl restful daemon supports text and JSON format requests and responses though it also supports simple XML action. The following improvements are expected to be done if time permitted. <br>
 
-1. webservice libs for resolving wsdl and xsd for more complicate XML responses<br>
+1. webservice functions for more complicate XML responses<br>
 
