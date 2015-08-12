@@ -24,3 +24,5 @@ Currently Perl restful daemon supports text and JSON format requests and respons
 
 1. webservice functions for more complicate XML responses<br>
 
+# AUTHOR
+Joe Chiu
