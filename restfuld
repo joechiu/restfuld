@@ -4,30 +4,20 @@ This is a lite RESTful server developed by Perl. It is capable of handling data 
 YAML not supported yet.
 The restful log: /tmp/restful-yyyymmdd.log by default
 =cut
+
 use strict;
 use DBI;
 use HTTP::Daemon;
+use HTTP::Daemon::SSL;
 use HTTP::Status;
 use POSIX qw/strftime/;
 use JSON;
-use XML::Simple qw(:strict);	# replace this module if paring XML becomes complicated
+use XML::Simple qw(:strict);    # replace this module if paring XML becomes complicated
 use Getopt::Long;
 use Pod::Usage;
 use Data::Dumper;
 use lib '/srv/restful/lib';
 use u;
-
-=head1 Installation 
-Cannot install the package due to the inproper repository disabled the SSL connection.
-Will be enabled till the package is ready 
-    REQUEST_TIMEOUT	    : 300; # timeout for processing each request
-    DEFAULT_PORT	    : 34780;
-    DEFAULT_SSL_PORT	    : 34743;
-    DEFAULT_LISTEN	    : 5;
-    DEFAULT_SSL_KEY_FILE    : '/etc/ssl.key';
-    DEFAULT_SSL_CERT_FILE   : '/etc/ssl.crt';
-    use HTTP::Daemon::SSL;
-=cut
 
 use constant REQUEST_TIMEOUT	    => 300; # timeout for processing each request
 use constant DEFAULT_PORT	    => 34780;
@@ -58,7 +48,24 @@ GetOptions (
 pod2usage(1) if $help;
 pod2usage( -existstatus => 0, -verbose => 2 ) if $man; 
 
-my $d = HTTP::Daemon->new(
+my $d;
+
+=head1 Installation 
+Cannot install the package due to the inproper repository disabled the SSL connection.
+Will be enabled till the package is ready 
+    $d = HTTP::Daemon::SSL->new(
+        LocalPort       => $port || DEFAULT_SSL_PORT,
+        Listen          => $listen || DEFAULT_LISTEN,
+        Proto           => 'tcp',
+        Reuse           => 1,
+        SSL_server      => 1,
+        SSL_verify_mode => 0x00, # no client authentication
+        SSL_key_file    => DEFAULT_SSL_KEY_FILE,
+        SSL_cert_file   => DEFAULT_SSL_CERT_FILE,
+    );
+=cut
+
+$d = HTTP::Daemon->new(
     LocalPort	=> $port || DEFAULT_PORT,
     Listen	=> $listen || DEFAULT_LISTEN,
     Reuse	=> 1,
