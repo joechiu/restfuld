@@ -15,6 +15,7 @@ http://localhost:34780/?act=test&hello=world&foo=bar<br>
 {"hello":"world","foo":"bar"}<br>
 4. check if a log restful-ddddmmyy.log generated in /tmp/<br>
 <br><br>
+
 # TODO<br>
 Currently Perl restful daemon supports text and JSON format request and response though it also supports simple XML action. The following improvements are expected to be done if time permitting. <br>
 1. webservice libs for resolving wsdl and xsd<br>
