@@ -1,0 +1,104 @@
+#!/usr/bin/perl 
+=head1 Description
+This is a lite RESTful server developed by Perl. It is capable of handling data format in JSON, XML and text. 
+YAML not supported yet.
+The restful log: /tmp/restful-yyyymmdd.log by default
+=cut
+use strict;
+use DBI;
+use HTTP::Daemon;
+use HTTP::Status;
+use POSIX qw/strftime/;
+use JSON;
+use XML::Simple qw(:strict);	# replace this module if paring XML becomes complicated
+use Getopt::Long;
+use Pod::Usage;
+use Data::Dumper;
+use lib '/srv/restful/lib';
+use u;
+
+=head1 Installation 
+Cannot install the package due to the inproper repository disabled the SSL connection.
+Will be enabled till the package is ready 
+    REQUEST_TIMEOUT	    : 300; # timeout for processing each request
+    DEFAULT_PORT	    : 34780;
+    DEFAULT_SSL_PORT	    : 34743;
+    DEFAULT_LISTEN	    : 5;
+    DEFAULT_SSL_KEY_FILE    : '/etc/ssl.key';
+    DEFAULT_SSL_CERT_FILE   : '/etc/ssl.crt';
+    use HTTP::Daemon::SSL;
+=cut
+
+use constant REQUEST_TIMEOUT	    => 300; # timeout for processing each request
+use constant DEFAULT_PORT	    => 34780;
+use constant DEFAULT_SSL_PORT	    => 34743;
+use constant DEFAULT_LISTEN	    => 25;
+use constant DEFAULT_SSL_KEY_FILE   => '/etc/ssl.key';
+use constant DEFAULT_SSL_CERT_FILE  => '/etc/ssl.crt';
+
+my (
+    $verbose, $debug, $help, $man, 
+    $server, $port, $listen, $key_file, 
+    $cert_file, $ssl
+);
+ 
+GetOptions (
+    'verbose|v+'    => \$verbose,
+    'debug|d+'	    => \$debug,
+    'help|?'        => \$help,
+    'man|m'         => \$man,
+    'port=s'        => \$port,
+    'listen|i'      => \$listen,
+    'key|k'         => \$key_file,
+    'cert|c'        => \$cert_file,
+    'ssl|s'         => \$ssl,
+    'log=s'         => \$log,
+) or pod2usage(2);
+
+pod2usage(1) if $help;
+pod2usage( -existstatus => 0, -verbose => 2 ) if $man; 
+
+my $d = HTTP::Daemon->new(
+    LocalPort	=> $port || DEFAULT_PORT,
+    Listen	=> $listen || DEFAULT_LISTEN,
+    Reuse	=> 1,
+    Proto	=> 'tcp',
+) || die "Can't create RESTful server($port): $!";
+
+logit( "RESTful server starts($port)..." );
+
+$SIG{CHLD} = 'IGNORE';  # ignore if child died timeout or normally
+
+while (my $c = $d->accept) {
+
+    if (my $pid = fork) {
+	$c->close();
+	next;
+    }
+
+    # child
+    $c->sockopt(SO_KEEPALIVE, 1);
+    # the whole connetion from each client must be done in 300 seconds!
+    $c->timeout(REQUEST_TIMEOUT); 
+
+    while (my $r = $c->get_request) {
+	    
+	require Server;
+	my $type = _init($r, $c->peerhost());		
+
+	# currently supports GET and POST
+	# you may add PUT and DELETE if want 
+	if ($r->method =~ /^(GET|POST)/) {
+
+	    my $res = _res($type, $r->content);
+	    $c->send_response($res);
+
+	} else {
+	    $c->send_error(RC_FORBIDDEN)
+	}
+   }
+   exit(0);
+}
+
+__END__
+
