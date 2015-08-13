@@ -16,7 +16,7 @@ use XML::Simple qw(:strict);    # replace this module if paring XML becomes comp
 use Getopt::Long;
 use Pod::Usage;
 use Data::Dumper;
-use lib '/srv/restful/lib';
+use lib '/srv/restfuld/lib';
 use u;
 
 use constant REQUEST_TIMEOUT	    => 300; # timeout for processing each request

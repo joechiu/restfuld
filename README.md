@@ -5,15 +5,20 @@ A lite restful daemon service developed by Perl. <br>
 tested by centos 6.4, Ubuntu 12 and 14<br>
 <br><br>
 # INSTALLATION<br>
-1. copy ./conf/restful.conf to /etc/init<br>
-2. run the following commands<br>
+1. cd ~/
+2. git clone https://github.com/joechiu/restfuld.git
+3. cd /srv/
+4. ln -s ~/restfuld restful
+5. cd restful
+6. copy ./conf/restful.conf to /etc/init<br>
+7. run the following commands<br>
 $ stop restful; start restful<br>
 -- restful stop/waiting<br>
 -- restful start/running, process 5866<br>
-3. check if restful daemon is running by a browser<br>
+8. check if restful daemon is running by a browser or GET, wget is fine<br>
 http://localhost:34780/?act=test&hello=world&foo=bar<br>
 {"hello":"world","foo":"bar"}<br>
-4. check if a log restful-ddddmmyy.log generated in /tmp/<br>
+9. check if a log restful-ddddmmyy.log generated in /tmp/<br>
 <br><br>
 
 # KNOWN ISSUES<br>
@@ -26,3 +31,4 @@ Currently Perl restful daemon supports text and JSON format requests and respons
 
 # AUTHOR
 Joe Chiu
+
