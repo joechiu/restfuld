@@ -19,28 +19,24 @@ use Data::Dumper;
 use lib '/srv/restfuld/lib';
 use u;
 
-use constant REQUEST_TIMEOUT	    => 300; # timeout for processing each request
-use constant DEFAULT_PORT	    => 34780;
-use constant DEFAULT_SSL_PORT	    => 34743;
-use constant DEFAULT_LISTEN	    => 25;
-use constant DEFAULT_SSL_KEY_FILE   => '/etc/ssl.key';
-use constant DEFAULT_SSL_CERT_FILE  => '/etc/ssl.crt';
+use constant TIMEOUT	=> 300; # timeout for processing each request
+use constant PORT	=> 34780;
+use constant SSL_PORT	=> 34743;
+use constant LISTEN	=> 25;
+use constant SSL_KEY	=> '/etc/ssl.key';
+use constant SSL_CERT	=> '/etc/ssl.crt';
 
 my (
-    $verbose, $debug, $help, $man, 
-    $server, $port, $listen, $key_file, 
-    $cert_file, $ssl
+    $verbose, $help, $man, $server, 
+    $port, $listen, $ssl
 );
  
 GetOptions (
     'verbose|v+'    => \$verbose,
-    'debug|d+'	    => \$debug,
     'help|?'        => \$help,
     'man|m'         => \$man,
     'port=s'        => \$port,
     'listen|i'      => \$listen,
-    'key|k'         => \$key_file,
-    'cert|c'        => \$cert_file,
     'ssl|s'         => \$ssl,
     'log=s'         => \$log,
 ) or pod2usage(2);
@@ -54,20 +50,20 @@ my $d;
 Cannot install the package due to the inproper repository disabled the SSL connection.
 Will be enabled till the package is ready 
     $d = HTTP::Daemon::SSL->new(
-        LocalPort       => $port || DEFAULT_SSL_PORT,
-        Listen          => $listen || DEFAULT_LISTEN,
+        LocalPort       => $port || SSL_PORT,
+        Listen          => $listen || LISTEN,
         Proto           => 'tcp',
         Reuse           => 1,
         SSL_server      => 1,
         SSL_verify_mode => 0x00, # no client authentication
-        SSL_key_file    => DEFAULT_SSL_KEY_FILE,
-        SSL_cert_file   => DEFAULT_SSL_CERT_FILE,
+        SSL_key_file    => SSL_KEY,
+        SSL_cert_file   => SSL_CERT,
     );
 =cut
 
 $d = HTTP::Daemon->new(
-    LocalPort	=> $port || DEFAULT_PORT,
-    Listen	=> $listen || DEFAULT_LISTEN,
+    LocalPort	=> $port || PORT,
+    Listen	=> $listen || LISTEN,
     Reuse	=> 1,
     Proto	=> 'tcp',
 ) || die "Can't create RESTful server($port): $!";
@@ -86,7 +82,7 @@ while (my $c = $d->accept) {
     # child
     $c->sockopt(SO_KEEPALIVE, 1);
     # the whole connetion from each client must be done in 300 seconds!
-    $c->timeout(REQUEST_TIMEOUT); 
+    $c->timeout(TIMEOUT); 
 
     while (my $r = $c->get_request) {
 	    
