@@ -41,7 +41,7 @@ GetOptions (
     'log=s'         => \$log,
 ) or pod2usage(2);
 
-pod2usage(1) if $help;
+print "More details in GitHub: https://github.com/joechiu/restfuld/blob/master/README.md\n" and exit if $help;
 pod2usage( -existstatus => 0, -verbose => 2 ) if $man; 
 
 my $d;
