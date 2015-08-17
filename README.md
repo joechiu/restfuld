@@ -22,7 +22,7 @@ http://localhost:34780/?act=test&hello=world&foo=bar<br>
 <br><br>
 
 # KNOWN ISSUES<br>
-SSL connection is disabled due to an unknown certificate repository issue<br>
+SSL connection wont work for self signed certificate due to an unknown certificate repository issue<br>
 Please refer to the comments in restful.conf for more details<br>
 
 # TODO<br>
