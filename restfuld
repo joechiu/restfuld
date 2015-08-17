@@ -16,7 +16,7 @@ use XML::Simple qw(:strict);    # replace this module if paring XML becomes comp
 use Getopt::Long;
 use Pod::Usage;
 use Data::Dumper;
-use lib '/srv/restfuld/lib';
+use lib '/srv/restful/lib';
 use u;
 
 use constant TIMEOUT	=> 300; # timeout for processing each request
@@ -53,19 +53,19 @@ Will be enabled till the package is ready for self signed certificate
 
 if ($ssl) {
     $d = HTTP::Daemon::SSL->new(
-        LocalPort       => $port || DEFAULT_SSL_PORT,
-        Listen          => $listen || DEFAULT_LISTEN,
+        LocalPort       => $port || SSL_PORT,
+        Listen          => $listen || LISTEN,
         Proto           => 'tcp',
         Reuse           => 1,
         SSL_server      => 1,
         SSL_verify_mode => 0x00, # no client authentication
-        SSL_key_file    => DEFAULT_SSL_KEY_FILE,
-        SSL_cert_file   => DEFAULT_SSL_CERT_FILE,
+        SSL_key_file    => SSL_KEY,
+        SSL_cert_file   => SSL_CERT,
     );
 } else {
     $d = HTTP::Daemon->new(
-        LocalPort       => $port ||= DEFAULT_PORT,
-        Listen          => $listen || DEFAULT_LISTEN,
+        LocalPort       => $port ||= PORT,
+        Listen          => $listen || LISTEN,
         Reuse           => 1,
         Proto           => 'tcp',
     );
