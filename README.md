@@ -21,7 +21,7 @@ http://localhost:34780/?act=test&hello=world&foo=bar<br>
 9. check if a log restful-ddddmmyy.log generated in /tmp/<br>
 eg.<br>
 [03:54:28 28849]        pid is same as fork<br>
-[03:54:28 13464]        -------- web@203.194.27.85 --------<br>
+[03:54:28 13464]        -------- web@xxx.xxx.xx.xxx --------<br>
 [03:54:28 13464]        Type: application/json, Action: test, Method: GET<br>
 [03:54:28 13464]        Content: {"hello":"world","foo":"bar"}<br>
 [03:54:28 13464]        Redo process: test.pl<br>
