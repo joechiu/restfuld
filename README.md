@@ -1,5 +1,5 @@
 # restfuld<br>
-A lite restful daemon service developed by Perl. <br>
+A lite powerful restful daemon service developed by Perl. <br>
 <br>
 # SYSTEM<br>
 tested by centos 6.4, Ubuntu 12 and 14<br>
