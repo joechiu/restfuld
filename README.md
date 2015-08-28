@@ -21,6 +21,14 @@ http://localhost:34780/?act=test&hello=world&foo=bar<br>
 9. check if a log restful-ddddmmyy.log generated in /tmp/<br>
 <br><br>
 
+# API INSTALLATION
+Implement the following methods to build your own API as plugin.
+1. create a new folder under the plugins diretory
+2. commit the programs and packages under the folder
+3. add an action into default-settings.pl under the plugins directory (optional)
+4. method todo will instantiate the plugin or capture the value returned from your program
+5. see the sample plugin for example
+
 # KNOWN ISSUES<br>
 SSL connection wont work for self signed certificate due to an unknown certificate repository issue<br>
 Please refer to the comments in restful.conf for more details<br>
