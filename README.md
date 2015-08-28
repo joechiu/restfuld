@@ -26,7 +26,7 @@ SSL connection wont work for self signed certificate due to an unknown certifica
 Please refer to the comments in restful.conf for more details<br>
 
 # TODO<br>
-Currently Perl restful daemon supports text and JSON format requests and responses though it also supports simple XML action. The following improvements are expected to be done if time permitted. <br>
+Currently Perl restful daemon supports text and JSON format requests and responses well though it also supports simple XML action. The following improvements would be expected to be done if time permitted. <br>
 
 1. webservice functions for SOAP requests<br>
 
