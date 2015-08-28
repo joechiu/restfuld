@@ -22,12 +22,13 @@ http://localhost:34780/?act=test&hello=world&foo=bar<br>
 <br><br>
 
 # API INSTALLATION
-Implement the following methods to build your own API as plugin.
-1. create a new folder under the plugins diretory
-2. commit the programs and packages under the folder
-3. add an action into default-settings.pl under the plugins directory (optional)
-4. method todo will instantiate the plugin or capture the value returned from your program
-5. see the sample plugin for example
+Implement the following methods to build your own API as plugin.<br>
+1. create a new folder under the plugins diretory<br>
+2. commit the programs and packages under the folder<br>
+3. add an action into default-settings.pl under the plugins directory (optional)<br>
+4. method todo will instantiate the plugin or capture the value returned from your program<br>
+5. see the sample plugin for example<br>
+<br><br>
 
 # KNOWN ISSUES<br>
 SSL connection wont work for self signed certificate due to an unknown certificate repository issue<br>
