@@ -3,6 +3,5 @@
 # if package defined, method is mandantory
 # default program: main.pl
 $plugins = {
-    auto	=> { package => 'address', method => 'res' },
     test	=> { main => 'test.pl' },
 };
