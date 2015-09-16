@@ -1,0 +1,22 @@
+#!/sbin/runscript
+# Copyright 1999-2004 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+        need net
+        need localmount
+}
+
+start() {
+        ebegin "Starting restful"
+        start-stop-daemon --background --start \
+            --exec /srv/restful/restfuld 2> /dev/null \
+            --make-pidfile --pidfile /var/run/restful.pid
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping restful"
+        start-stop-daemon --stop --pidfile /var/run/restful.pid
+        eend $?
+}
