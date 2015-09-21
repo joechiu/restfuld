@@ -39,8 +39,7 @@ Implement the following methods to build your own API as plugin.<br>
 <br><br>
 
 # KNOWN ISSUES<br>
-SSL connection wont work for self signed certificate due to an unknown certificate repository issue<br>
-Please refer to the comments in restful.conf for more details<br>
+Update the Perl SSL modules to the most recent versions if meet SSL connection issues for self signed certificate<br>
 
 # TODO<br>
 Currently Perl restful daemon supports text and JSON format requests and responses well though it also supports simple XML action. The following improvements would be expected to be done if time permitted. <br>
