@@ -3,7 +3,7 @@ use Data::Dumper;
 use lib '/srv/restful/lib';
 use u;
 my $t1 = _gettime;
-$h = $main::params || { hello => 'world' };
+$h = $params || { hello => 'world' };
 my $t2 = _gettime;
 $h->{realtime} = _timediff($t1,$t2);
 logit "Results: "._to_json($h);
