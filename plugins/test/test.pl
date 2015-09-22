@@ -3,11 +3,13 @@ use Data::Dumper;
 use lib '/srv/restful/lib';
 use u;
 
+# benchmark, optional
 my $t1 = _gettime;
 
 # global params
 $h = $params || { hello => 'world' };
 
+# benchmark, optional
 my $t2 = _gettime;
 $h->{realtime} = _timediff($t1,$t2);
 
