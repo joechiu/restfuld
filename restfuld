@@ -26,6 +26,8 @@ use constant LISTEN	=> 25;
 use constant SSL_KEY	=> '/etc/ssl.key';
 use constant SSL_CERT	=> '/etc/ssl.crt';
 
+our $params;
+
 my (
     $verbose, $help, $man, $server, 
     $port, $listen, $ssl
