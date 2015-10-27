@@ -29,7 +29,7 @@ eg.<br>
 
 <br><br>
 
-# API INSTALLATION
+# PLUGIN API
 Implement the following methods to build your own API as plugin.<br>
 1. create a new folder under the plugins diretory<br>
 2. commit the programs and packages under the folder<br>
