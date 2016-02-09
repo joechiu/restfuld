@@ -7,7 +7,7 @@ use u;
 my $t1 = _gettime;
 
 # global params
-$h = $params || { hello => 'world' };
+$h = $main::params || { hello => 'world' };
 
 # benchmark, optional
 my $t2 = _gettime;
