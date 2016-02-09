@@ -48,7 +48,7 @@ sub _init {
     delete $h{ip};
     delete $h{act};
 
-    $params = $ACTION =~ /nbn-search/i ? _filter_hash(\%h) : \%h;
+    $main::params = $ACTION =~ /nbn-search/i ? _filter_hash(\%h) : \%h;
     return $CONTYPE;
 }
 
@@ -71,7 +71,7 @@ sub _error {
 sub _res {
     my $type = shift;
     my $content = shift;
-    my $h = $params;
+    my $h = $main::params;
     my $res;
 
     if ($type =~ /json/i) {
